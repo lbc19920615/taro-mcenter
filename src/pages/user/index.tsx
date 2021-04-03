@@ -1,9 +1,8 @@
 import { Component } from 'react'
-import { Button, View } from '@tarojs/components'
+import { View, Button, Text } from '@tarojs/components'
 import { observer, inject } from 'mobx-react'
 
 import './index.scss'
-import { router } from '../../router'
 
 type PageStateProps = {
   store: {
@@ -33,14 +32,29 @@ class Index extends Component {
 
   componentDidHide () { }
 
-  goToPage() {
-    router.navigateTo('/user')
+  increment = () => {
+    const { counterStore } = this.props.store
+    counterStore.increment()
+  }
+
+  decrement = () => {
+    const { counterStore } = this.props.store
+    counterStore.decrement()
+  }
+
+  incrementAsync = () => {
+    const { counterStore } = this.props.store
+    counterStore.incrementAsync()
   }
 
   render () {
+    const { counterStore: { counter } } = this.props.store
     return (
       <View className='index'>
-        <Button onClick={this.goToPage}>go to user</Button>
+        <Button onClick={this.increment}>+</Button>
+        <Button onClick={this.decrement}>-</Button>
+        <Button onClick={this.incrementAsync}>Add Async</Button>
+        <Text>{counter}</Text>
       </View>
     )
   }

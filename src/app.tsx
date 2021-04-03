@@ -10,7 +10,8 @@ const store = {
 }
 
 class App extends Component {
-  componentDidMount () {}
+  componentDidMount () {
+  }
 
   componentDidShow () {}
 
